@@ -10,10 +10,11 @@ const TodoModel = require('./Models/Todo')
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const EmployeeModel = require('./Models/Employee')
+const BASE_URL = process.env.BASE_URL
 
 const app = express()
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: [`${BASE_URL}`],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }))
