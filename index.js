@@ -10,11 +10,11 @@ const TodoModel = require('./Models/Todo')
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const EmployeeModel = require('./Models/Employee')
-const BASE_URL = process.env.BASE_URL
+const PORT = process.env.PORT || 8080
 
 const app = express()
 app.use(cors({
-    origin: [`${BASE_URL}`],
+    origin: ['http://localhost:5173'],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }))
@@ -24,6 +24,10 @@ app.use(cookieParser())
 app.use('/uploads', express.static('uploads'))
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
+
+app.get('/', (req,res) => {
+    res.status(200).json({OK:"Succesful ping"})
+})
 
 app.post('/register', (req,res) => {
     // EmployeeModel.create(req.body)
@@ -108,6 +112,6 @@ app.post('/add', upload.single('image'), (req, res) => {
     .catch(err => res.json(err))
 })
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
     console.log("Server is running")
 })
