@@ -71,7 +71,7 @@ app.post('/login', (req,res) => {
         else {
             res.json("No record existed")
         }
-    })
+    }).catch(err => res.json(err))
 })
 
 app.get('/get', (req,res) => {
